@@ -37,31 +37,36 @@ class _NewHomeScreenState extends State<NewHomeScreen> {
       'name': 'Chutes de la Métché',
       'details': 'Découvrez la puissance brute et la beauté naturelle des chutes de la Métché, un joyau caché près de Dschang, parfait pour une escapade mémorable.',
       'latitude': 5.4500, 'longitude': 10.0500,
-      'placeholderColor': Colors.teal, // Couleur utilisée pour le fond du placeholder d'image.
+      'placeholderColor': Colors.teal,
+      'imageAsset': 'assets/images/chute_metche.jpg',
     },
     {
       'name': 'Musée des Civilisations à Dschang',
       'details': 'Plongez au cœur des traditions de l\'Ouest Cameroun au Musée des Civilisations à Dschang, un voyage fascinant à travers l\'art et l\'histoire.',
       'latitude': 5.4430, 'longitude': 10.0600,
       'placeholderColor': Colors.amber,
+      'imageAsset': 'assets/images/musee_foumban.jpg',
     },
     {
       'name': 'Chefferie de Bafoussam',
       'details': 'Visitez la majestueuse Chefferie de Bafoussam, un centre vibrant de la culture Bamileke, et admirez son architecture traditionnelle et son histoire royale.',
       'latitude': 5.4730, 'longitude': 10.4200,
       'placeholderColor': Colors.purple,
+      'imageAsset': 'assets/images/chefferie_de_bafoussam.jpg',
     },
     {
       'name': 'Mont Mbapit',
       'details': 'Aventurez-vous sur le Mont Mbapit, un ancien volcan offrant des randonnées spectaculaires jusqu\'à son lac de cratère mystique et des vues panoramiques à couper le souffle.',
       'latitude': 5.1500, 'longitude': 10.7000,
       'placeholderColor': Colors.green,
+      'imageAsset': 'assets/images/mont_mbapit.jpg',
     },
     {
       'name': 'Lac Baleng',
       'details': 'Explorez les rives sereines du Lac Baleng, un lieu empreint de légendes locales et d\'une beauté tranquille, idéal pour une réflexion paisible et la photographie.',
       'latitude': 5.4800, 'longitude': 10.3500,
       'placeholderColor': Colors.cyan,
+      'imageAsset': 'assets/images/baleng.jpg',
     }
   ];
 
@@ -97,6 +102,69 @@ class _NewHomeScreenState extends State<NewHomeScreen> {
             duration: const Duration(seconds: 1), // Durée de l'animation pour le changement de fond.
             decoration: _currentBackground, // Applique la décoration de fond actuelle.
           ),
+          // Ajout d'un titre, météo fictive et bouton en haut de la page
+          SafeArea(
+            child: Padding(
+              padding: const EdgeInsets.symmetric(horizontal: 16.0, vertical: 12.0),
+              child: Column(
+                crossAxisAlignment: CrossAxisAlignment.start,
+                children: [
+                  Row(
+                    mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                    children: [
+                      Column(
+                        crossAxisAlignment: CrossAxisAlignment.start,
+                        children: [
+                          Text(
+                            'TourCam 360',
+                            style: TextStyle(
+                              color: Colors.white,
+                              fontSize: 28,
+                              fontWeight: FontWeight.bold,
+                              shadows: [Shadow(blurRadius: 4, color: Colors.black45, offset: Offset(1,2))],
+                            ),
+                          ),
+                          SizedBox(height: 4),
+                          Text(
+                            'Découvrez l\'Ouest Cameroun autrement',
+                            style: TextStyle(
+                              color: Colors.white70,
+                              fontSize: 16,
+                              fontWeight: FontWeight.w400,
+                              shadows: [Shadow(blurRadius: 2, color: Colors.black26, offset: Offset(1,1))],
+                            ),
+                          ),
+                        ],
+                      ),
+                      // Météo fictive
+                      Row(
+                        children: [
+                          Icon(Icons.wb_sunny, color: Colors.yellowAccent, size: 28),
+                          SizedBox(width: 4),
+                          Text('28°C', style: TextStyle(color: Colors.white, fontSize: 18, fontWeight: FontWeight.bold)),
+                        ],
+                      ),
+                    ],
+                  ),
+                  SizedBox(height: 12),
+                  // Bouton vers la page de préférences d'itinéraire
+                  ElevatedButton.icon(
+                    style: ElevatedButton.styleFrom(
+                      backgroundColor: Colors.white.withOpacity(0.85),
+                      foregroundColor: Colors.blueAccent,
+                      shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(20)),
+                      elevation: 2,
+                    ),
+                    onPressed: () {
+                      Navigator.of(context).pushNamed('/itinerary_preferences');
+                    },
+                    icon: Icon(Icons.tune),
+                    label: Text('Personnaliser mon itinéraire'),
+                  ),
+                ],
+              ),
+            ),
+          ),
           // Deuxième couche du Stack : le carrousel.
           // Center est utilisé ici pour centrer le carrousel dans l'espace disponible,
           // bien que la hauteur du CarouselOptions définisse sa taille principale.
@@ -115,15 +183,16 @@ class _NewHomeScreenState extends State<NewHomeScreen> {
                   child: Stack( // Stack interne à la carte pour superposer du texte/bouton sur l'image placeholder.
                     alignment: Alignment.bottomCenter, // Aligne les enfants en bas au centre.
                     children: <Widget>[
-                      // Placeholder pour l'image du lieu.
-                      // Un Container coloré est utilisé car les images réelles ne sont pas gérées dans cette phase.
-                      Container(
-                        color: location['placeholderColor'] as Color? ?? Colors.blueGrey, // Couleur de fond du placeholder.
-                        child: Center( // Centre le texte du placeholder.
-                          child: Text(
-                            "Image de ${location['name']}", // Texte indiquant le nom du lieu.
-                            style: const TextStyle(color: Colors.white, fontSize: 18, fontWeight: FontWeight.bold),
-                            textAlign: TextAlign.center,
+                      // Affichage de l'image locale
+                      SizedBox(
+                        width: double.infinity,
+                        height: 260,
+                        child: Image.asset(
+                          location['imageAsset'],
+                          fit: BoxFit.cover,
+                          errorBuilder: (context, error, stackTrace) => Container(
+                            color: location['placeholderColor'] as Color? ?? Colors.blueGrey,
+                            child: Center(child: Icon(Icons.broken_image, color: Colors.white, size: 48)),
                           ),
                         ),
                       ),

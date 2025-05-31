@@ -5,7 +5,7 @@
     "category": "Nature",
     "latitude": 2.8987,
     "longitude": 9.9034,
-    "image_url": "https://example.com/lobe_falls.jpg"
+    "image_url": "assets/images/lobe.jpg"
   },
   {
     "name": "Parc National de Korup",
@@ -13,7 +13,7 @@
     "category": "Nature",
     "latitude": 5.0720,
     "longitude": 8.8288,
-    "image_url": "https://example.com/korup_park.jpg"
+    "image_url": "assets/images/korup.jpg"
   },
   {
     "name": "Mont Cameroun",
@@ -21,7 +21,7 @@
     "category": "Aventure",
     "latitude": 4.2030,
     "longitude": 9.1716,
-    "image_url": "https://example.com/mount_cameroon.jpg"
+    "image_url": "assets/images/mont_cameroun.jpg"
   },
   {
     "name": "Musée Royal de Foumban",
@@ -29,7 +29,7 @@
     "category": "Culture",
     "latitude": 5.7281,
     "longitude": 10.9000,
-    "image_url": "https://example.com/foumban_museum.jpg"
+    "image_url": "assets/images/foumban.jpg"
   },
   {
     "name": "Plages de Kribi",
@@ -37,6 +37,6 @@
     "category": "Détente",
     "latitude": 2.9450,
     "longitude": 9.9100,
-    "image_url": "https://example.com/kribi_beaches.jpg"
+    "image_url": "assets/images/kribi.jpg"
   }
 ]
