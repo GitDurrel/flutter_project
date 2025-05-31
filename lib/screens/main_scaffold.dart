@@ -4,6 +4,7 @@ import 'new_home_screen.dart'; // Importation du nouvel écran d'accueil immersi
 import 'profile_page.dart'; // Page de profil (onglet "Profil")
 import 'image_recognition_page.dart'; // Page de reconnaissance d'image (onglet "Reconnaissance")
 import 'stats_page.dart'; // Page de statistiques (onglet "Statistiques")
+import 'itinerary_preferences_page.dart'; // Ajout de la page de préférences d'itinéraire
 import '../utils/constants.dart'; // Pour les couleurs globales comme kPrimaryColor.
 
 // StatefulWidget principal qui gère la navigation par onglets (BottomNavigationBar).
@@ -24,10 +25,11 @@ class _MainScaffoldWithBottomNavbarState
   // Liste statique des widgets (pages) à afficher pour chaque onglet.
   // L'ordre correspond à celui des BottomNavigationBarItem.
   static const List<Widget> _pages = <Widget>[
-    NewHomeScreen(), // Onglet 0: Nouvel accueil immersif (remplace ItineraryPreferencesPage ici)
-    ProfilePage(), // Onglet 1: Profil
-    ImageRecognitionPage(), // Onglet 2: Reconnaissance image
-    StatsPage(), // Onglet 3: Statistiques
+    NewHomeScreen(), // Onglet 0: Accueil immersif
+    ItineraryPreferencesPage(), // Onglet 1: Préférences d'itinéraire (nouvel onglet central)
+    ProfilePage(), // Onglet 2: Profil
+    ImageRecognitionPage(), // Onglet 3: Reconnaissance image
+    StatsPage(), // Onglet 4: Statistiques
   ];
 
   // Callback appelé lorsque l'utilisateur appuie sur un onglet de la BottomNavigationBar.
@@ -48,8 +50,12 @@ class _MainScaffoldWithBottomNavbarState
         // Liste des éléments (onglets) de la barre de navigation.
         items: const <BottomNavigationBarItem>[
           BottomNavigationBarItem(
-            icon: Icon(CupertinoIcons.map_pin_ellipse), // Icône pour l'itinéraire.
-            label: 'Itinéraire', // Libellé de l'onglet.
+            icon: Icon(CupertinoIcons.home), // Icône pour l'accueil immersif.
+            label: 'Accueil',
+          ),
+          BottomNavigationBarItem(
+            icon: Icon(CupertinoIcons.map_pin_ellipse), // Icône pour les préférences d'itinéraire.
+            label: 'Itinéraire',
           ),
           BottomNavigationBarItem(
             icon: Icon(CupertinoIcons.profile_circled), // Icône pour le profil.
@@ -57,7 +63,7 @@ class _MainScaffoldWithBottomNavbarState
           ),
           BottomNavigationBarItem(
             icon: Icon(CupertinoIcons.camera_viewfinder), // Icône pour la reconnaissance d'image.
-            label: 'Reconnaissance', // Libellé raccourci pour un meilleur affichage.
+            label: 'Reconnaissance',
           ),
           BottomNavigationBarItem(
             icon: Icon(CupertinoIcons.chart_bar_square), // Icône pour les statistiques.
