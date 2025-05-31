@@ -1,8 +1,11 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
-import '../utils/fade_page_route.dart'; // Import for custom transition
-import 'suggested_places_page.dart'; // Import for navigation target
+import '../utils/fade_page_route.dart';
+import 'suggested_places_page.dart';
+import '../models/user_preferences.dart'; // Importation du modèle UserPreferences.
 
+// StatefulWidget pour la page de sélection des préférences d'itinéraire.
+// L'utilisateur peut ici choisir ses centres d'intérêt.
 class ItineraryPreferencesPage extends StatefulWidget {
   const ItineraryPreferencesPage({super.key});
 
@@ -12,6 +15,8 @@ class ItineraryPreferencesPage extends StatefulWidget {
 }
 
 class _ItineraryPreferencesPageState extends State<ItineraryPreferencesPage> {
+  // Map pour stocker l'état de sélection de chaque préférence.
+  // La clé est le nom de la préférence (String), la valeur est un booléen (true si sélectionné).
   final Map<String, bool> _preferences = {
     "Nature & paysages": false,
     "Histoire & culture": false,
@@ -24,37 +29,44 @@ class _ItineraryPreferencesPageState extends State<ItineraryPreferencesPage> {
     return Scaffold(
       appBar: AppBar(
         title: const Text("Vos Préférences d'Itinéraire"),
-        actions: [ // Keeping settings icon for now as per previous structure
+        actions: [ // Conservation de l'icône des paramètres pour l'instant, comme dans la structure précédente.
           IconButton(
             icon: const Icon(CupertinoIcons.settings),
-            tooltip: 'Open Settings',
+            tooltip: 'Ouvrir les paramètres', // Info-bulle en français.
             onPressed: () {
-              print('Settings button pressed');
+              // Action pour le bouton des paramètres.
+              print('Bouton des paramètres cliqué'); // Message de débogage en français.
             },
           ),
         ],
       ),
       body: ListView(
-        padding: const EdgeInsets.all(16.0),
+        padding: const EdgeInsets.all(16.0), // Espacement intérieur pour la liste.
         children: <Widget>[
+          // Génération dynamique des CheckboxListTile pour chaque préférence.
           ..._preferences.keys.map((String key) {
             return CheckboxListTile(
-              title: Text(key),
-              value: _preferences[key],
+              title: Text(key), // Le nom de la préférence.
+              value: _preferences[key], // L'état actuel de la sélection (coché/décoché).
               onChanged: (bool? value) {
+                // Mise à jour de l'état lorsque l'utilisateur coche/décoche la case.
                 setState(() {
                   _preferences[key] = value!;
                 });
               },
             );
-          }).toList(),
-          const SizedBox(height: 20),
+          }).toList(), // Conversion de l'iterable en liste de widgets.
+          const SizedBox(height: 20), // Espace vertical avant le bouton.
           ElevatedButton(
             onPressed: () {
-              // print('Selected preferences: $_preferences'); // Can keep for debugging
+              // Action lors du clic sur le bouton "Voir les suggestions".
+              // print('Préférences sélectionnées : $_preferences'); // Message de débogage pour voir les préférences.
+              // Création d'un objet UserPreferences avec les sélections actuelles.
+              final userPrefs = UserPreferences(preferences: _preferences);
+              // Navigation vers la page des lieux suggérés, en passant l'objet UserPreferences.
               Navigator.of(context).push(
                 FadePageRoute(
-                  child: SuggestedPlacesPage(selectedPreferences: _preferences),
+                  child: SuggestedPlacesPage(userPreferences: userPrefs),
                 ),
               );
             },
