@@ -2,10 +2,6 @@
 
 Je veux que tu m'aides avec la base de mon application Flutter, plus précisément son **UX/UI**. Voici les consignes à suivre pour la mise en place :
 
-## 🛠️ Environnement de développement
-- **IDE utilisé** : **Android Studio**
-- **Base du projet** : Application **iOS**
-- Android Studio est choisi pour sa gestion **optimisée des dépendances**, sa prise en charge des **API natives**, et ses outils de **profiling avancés** pour le debugging.
 
 ## 🎨 1. Palette de couleurs
 Palette sélectionnée sur Vimes :
