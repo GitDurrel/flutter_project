@@ -20,7 +20,6 @@ Le code source de l'application est principalement organisé dans le dossier `li
         *   `image_recognition_page.dart` (`ImageRecognitionPage`): Page placeholder pour la fonctionnalité de reconnaissance d'image (onglet central par défaut).
         *   `stats_page.dart` (`StatsPage`): Page placeholder pour les statistiques.
     *   **`widgets/`**: Contient les composants d'interface utilisateur réutilisables à travers différentes parties de l'application.
-        *   `breadcrumbs_display.dart` (`BreadcrumbsDisplay`): Un exemple de widget personnalisé (actuellement non utilisé dans le flux principal après l'introduction de `NewHomeScreen`). La barre de navigation inférieure est intégrée directement dans `MainScaffoldWithBottomNavbar`.
     *   **`models/`**: Définit les structures de données (modèles) utilisées dans l'application.
         *   `place.dart` (`Place`): Modèle pour un lieu touristique, incluant nom, description, catégorie, coordonnées, URL d'image. Contient une factory `fromJson` pour le parsing des données API et une méthode `toMap` pour la navigation.
         *   `user_preferences.dart` (`UserPreferences`): Modèle pour encapsuler les préférences de l'utilisateur et les convertir en paramètres de requête pour l'API.

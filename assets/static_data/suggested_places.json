@@ -1,0 +1,42 @@
+[
+  {
+    "name": "Chutes de la Lobé",
+    "description": "Des chutes d'eau uniques qui se jettent directement dans l'océan Atlantique. Un spectacle naturel impressionnant.",
+    "category": "Nature",
+    "latitude": 2.8987,
+    "longitude": 9.9034,
+    "image_url": "https://example.com/lobe_falls.jpg"
+  },
+  {
+    "name": "Parc National de Korup",
+    "description": "Une des plus anciennes et des plus riches forêts tropicales d'Afrique, abritant une biodiversité exceptionnelle.",
+    "category": "Nature",
+    "latitude": 5.0720,
+    "longitude": 8.8288,
+    "image_url": "https://example.com/korup_park.jpg"
+  },
+  {
+    "name": "Mont Cameroun",
+    "description": "Un volcan actif et le plus haut sommet d'Afrique de l'Ouest, offrant des randonnées difficiles mais gratifiantes.",
+    "category": "Aventure",
+    "latitude": 4.2030,
+    "longitude": 9.1716,
+    "image_url": "https://example.com/mount_cameroon.jpg"
+  },
+  {
+    "name": "Musée Royal de Foumban",
+    "description": "Un lieu riche en histoire et en art Bamoun, présentant des trônes, des masques et des objets royaux.",
+    "category": "Culture",
+    "latitude": 5.7281,
+    "longitude": 10.9000,
+    "image_url": "https://example.com/foumban_museum.jpg"
+  },
+  {
+    "name": "Plages de Kribi",
+    "description": "De magnifiques plages de sable blanc bordées de cocotiers, idéales pour la détente et les sports nautiques.",
+    "category": "Détente",
+    "latitude": 2.9450,
+    "longitude": 9.9100,
+    "image_url": "https://example.com/kribi_beaches.jpg"
+  }
+]

@@ -4,7 +4,7 @@ import 'package:flutter/material.dart';
 
 // Couleur Neutre: Souvent utilisée pour les fonds ou les éléments d'interface discrets.
 // Exemple: EDF259 (un jaune-vert clair)
-const kNeutralColor = Color(0xFFEDF259);
+const kNeutralColor = Color(0xFFF5F5F5);
 
 // Couleur Primaire: Couleur principale de l'application, utilisée pour les éléments importants
 // comme les AppBars, les boutons principaux, etc.

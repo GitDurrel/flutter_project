@@ -35,31 +35,31 @@ class _NewHomeScreenState extends State<NewHomeScreen> {
   static final List<Map<String, dynamic>> _carouselLocations = [
     {
       'name': 'Chutes de la Métché',
-      'details': 'Impressionnantes chutes d\'eau près de Dschang.',
+      'details': 'Découvrez la puissance brute et la beauté naturelle des chutes de la Métché, un joyau caché près de Dschang, parfait pour une escapade mémorable.',
       'latitude': 5.4500, 'longitude': 10.0500,
       'placeholderColor': Colors.teal, // Couleur utilisée pour le fond du placeholder d'image.
     },
     {
       'name': 'Musée des Civilisations à Dschang',
-      'details': 'Explore l\'histoire et la culture des peuples de l\'Ouest Cameroun.',
+      'details': 'Plongez au cœur des traditions de l\'Ouest Cameroun au Musée des Civilisations à Dschang, un voyage fascinant à travers l\'art et l\'histoire.',
       'latitude': 5.4430, 'longitude': 10.0600,
       'placeholderColor': Colors.amber,
     },
     {
       'name': 'Chefferie de Bafoussam',
-      'details': 'Siège traditionnel important, riche en histoire et culture Bamileke.',
+      'details': 'Visitez la majestueuse Chefferie de Bafoussam, un centre vibrant de la culture Bamileke, et admirez son architecture traditionnelle et son histoire royale.',
       'latitude': 5.4730, 'longitude': 10.4200,
       'placeholderColor': Colors.purple,
     },
     {
       'name': 'Mont Mbapit',
-      'details': 'Volcan éteint avec un lac de cratère, offre des vues panoramiques.',
+      'details': 'Aventurez-vous sur le Mont Mbapit, un ancien volcan offrant des randonnées spectaculaires jusqu\'à son lac de cratère mystique et des vues panoramiques à couper le souffle.',
       'latitude': 5.1500, 'longitude': 10.7000,
       'placeholderColor': Colors.green,
     },
     {
       'name': 'Lac Baleng',
-      'details': 'Lac de cratère mystique, lieu de légendes locales.',
+      'details': 'Explorez les rives sereines du Lac Baleng, un lieu empreint de légendes locales et d\'une beauté tranquille, idéal pour une réflexion paisible et la photographie.',
       'latitude': 5.4800, 'longitude': 10.3500,
       'placeholderColor': Colors.cyan,
     }
