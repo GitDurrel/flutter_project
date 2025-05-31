@@ -1,7 +1,8 @@
 import 'package:flutter/material.dart';
-import 'package:google_maps_flutter/google_maps_flutter.dart';
+import 'package:flutter_map/flutter_map.dart';
+import 'package:latlong2/latlong.dart' as latlong2; // Aliased for clarity
 
-// StatefulWidget pour afficher une carte Google Maps centrée sur un lieu spécifique.
+// StatefulWidget pour afficher une carte OpenStreetMap centrée sur un lieu spécifique.
 class MapDisplayPage extends StatefulWidget {
   // Données du lieu à afficher, incluant nom, latitude, longitude, etc.
   final Map<String, dynamic> placeData;
@@ -13,12 +14,10 @@ class MapDisplayPage extends StatefulWidget {
 }
 
 class _MapDisplayPageState extends State<MapDisplayPage> {
-  // Contrôleur pour interagir avec la GoogleMap.
-  late GoogleMapController mapController;
-  // Coordonnées LatLng du lieu.
-  late LatLng _placeLatLng;
-  // Ensemble des marqueurs à afficher sur la carte (ici, un seul marqueur pour le lieu).
-  final Set<Marker> _markers = {};
+  // Coordonnées LatLng du lieu pour flutter_map.
+  late latlong2.LatLng _placeLatLng;
+  // Liste des marqueurs à afficher sur la carte.
+  final List<Marker> _markers = [];
 
   @override
   void initState() {
@@ -31,32 +30,34 @@ class _MapDisplayPageState extends State<MapDisplayPage> {
       // Gérer l'erreur ou définir une valeur par défaut si les types sont incorrects.
       // Pour l'instant, affichage d'une erreur et utilisation d'une position par défaut (Paris).
       print("Erreur : La latitude ou la longitude n'est pas un double. Reçu lat: $lat, lng: $lng");
-      _placeLatLng = const LatLng(48.8566, 2.3522); // Position par défaut (centre de Paris).
+      _placeLatLng = latlong2.LatLng(48.8566, 2.3522); // Position par défaut (centre de Paris).
     } else {
-      _placeLatLng = LatLng(lat, lng);
+      _placeLatLng = latlong2.LatLng(lat, lng);
     }
 
     // Ajout du marqueur pour le lieu sur la carte.
+    // Note: flutter_map Markers are different from google_maps_flutter Markers.
+    // They are simpler and typically just a point with a widget (child).
+    // InfoWindow functionality needs custom implementation if desired.
     _markers.add(
       Marker(
-        // Identifiant unique pour le marqueur. Utilisation du nom du lieu.
-        markerId: MarkerId(widget.placeData['name'] as String? ?? 'Lieu inconnu'),
-        // Position du marqueur.
-        position: _placeLatLng,
-        // Fenêtre d'information affichée lors du clic sur le marqueur.
-        infoWindow: InfoWindow(
-          title: widget.placeData['name'] as String? ?? 'Lieu inconnu', // Nom du lieu.
-          snippet: widget.placeData['category'] as String? ?? '', // Catégorie du lieu comme sous-titre.
-        ),
+        point: _placeLatLng,
+        width: 80.0, // Largeur du marqueur
+        height: 80.0, // Hauteur du marqueur
+        child: Tooltip( // Utilisation d'un Tooltip en guise d'info simple au survol (sur web/desktop) ou appui long (mobile)
+          message: '${widget.placeData['name'] as String? ?? 'Lieu inconnu'}\n${widget.placeData['category'] as String? ?? ''}',
+          child: const Icon(
+            Icons.location_pin,
+            size: 50,
+            color: Colors.red,
+          ),
+        )
       ),
     );
   }
 
-  // Callback appelé lors de la création de la carte.
-  void _onMapCreated(GoogleMapController controller) {
-    mapController = controller;
-    // On pourrait ici, par exemple, animer la caméra vers la position si nécessaire.
-  }
+  // Pas de _onMapCreated nécessaire pour flutter_map dans cette configuration simple.
+  // Le MapController peut être utilisé pour des interactions programmatiques si besoin.
 
   @override
   Widget build(BuildContext context) {
@@ -65,17 +66,21 @@ class _MapDisplayPageState extends State<MapDisplayPage> {
         // Titre de l'AppBar : nom du lieu.
         title: Text(widget.placeData['name'] as String? ?? 'Carte'),
       ),
-      body: GoogleMap(
-        onMapCreated: _onMapCreated, // Callback pour la création de la carte.
-        // Position initiale de la caméra centrée sur le lieu.
-        initialCameraPosition: CameraPosition(
-          target: _placeLatLng, // Cible : coordonnées du lieu.
-          zoom: 14.0, // Niveau de zoom initial.
+      body: FlutterMap(
+        options: MapOptions(
+          initialCenter: _placeLatLng, // Cible : coordonnées du lieu.
+          initialZoom: 14.0, // Niveau de zoom initial.
         ),
-        markers: _markers, // Ensemble des marqueurs à afficher.
-        compassEnabled: true, // Afficher la boussole sur la carte.
-        zoomGesturesEnabled: true, // Activer les gestes de zoom.
-        // On pourrait ajouter d'autres options : myLocationEnabled, mapType, etc.
+        children: [
+          TileLayer(
+            urlTemplate: 'https://tile.openstreetmap.org/{z}/{x}/{y}.png',
+            userAgentPackageName: 'com.example.tourcam_360', // TODO: Remplacer par le vrai nom du package de l'app
+                                                        // Utiliser un nom de package pertinent pour l'application.
+          ),
+          MarkerLayer(
+            markers: _markers, // Liste des marqueurs à afficher.
+          ),
+        ],
       ),
     );
   }
